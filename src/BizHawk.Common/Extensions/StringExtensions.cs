@@ -27,6 +27,18 @@ namespace BizHawk.Common.StringExtensions
 		public static string RemovePrefix(this string str, char prefix, string notFoundValue) => str.Length != 0 && str[0] == prefix ? str.Substring(1, str.Length - 1) : notFoundValue;
 
 		/// <returns>
+		/// <paramref name="str"/> with the leading substring <paramref name="prefix"/> removed, or
+		/// the original <paramref name="str"/> if <paramref name="str"/> does not start with <paramref name="prefix"/>
+		/// </returns>
+		public static string RemovePrefix(this string str, string prefix) => str.RemovePrefix(prefix, notFoundValue: str);
+
+		/// <returns>
+		/// <paramref name="str"/> with the leading substring <paramref name="prefix"/> removed, or
+		/// <paramref name="notFoundValue"/> if <paramref name="str"/> does not start with <paramref name="prefix"/>
+		/// </returns>
+		public static string RemovePrefix(this string str, string prefix, string notFoundValue) => str.StartsWith(prefix) ? str.Substring(prefix.Length, str.Length - prefix.Length) : notFoundValue;
+
+		/// <returns>
 		/// <paramref name="str"/> with the last char removed, or
 		/// the original <paramref name="str"/> if the last char of <paramref name="str"/> is not <paramref name="suffix"/>
 		/// </returns>
@@ -34,6 +46,18 @@ namespace BizHawk.Common.StringExtensions
 			str.Length != 0 && str[str.Length - 1] == suffix
 				? str.Substring(0, str.Length - 1)
 				: str;
+
+		/// <returns>
+		/// <paramref name="str"/> with the trailing substring <paramref name="suffix"/> removed, or
+		/// the original <paramref name="str"/> if <paramref name="str"/> does not end with <paramref name="suffix"/>
+		/// </returns>
+		public static string RemoveSuffix(this string str, string suffix) => str.RemoveSuffix(suffix, notFoundValue: str);
+
+		/// <returns>
+		/// <paramref name="str"/> with the trailing substring <paramref name="suffix"/> removed, or
+		/// <paramref name="notFoundValue"/> if <paramref name="str"/> does not end with <paramref name="suffix"/>
+		/// </returns>
+		public static string RemoveSuffix(this string str, string suffix, string notFoundValue) => str.EndsWith(suffix) ? str.Substring(0, str.Length - suffix.Length) : notFoundValue;
 
 		/// <returns>
 		/// the substring of <paramref name="str"/> before the first occurrence of <paramref name="delimiter"/>, or
